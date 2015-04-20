@@ -50,6 +50,7 @@ class @TpDatepickerRange extends TpDatepicker
 
     oppositeRole = @_oppositeRole(role)
     if @settedRoles[oppositeRole]
+      @nodes[@role].classList.remove('tp-datepicker-trigger--active')
       @_setScale(0)
     else
       @_setupDate(oppositeRole, @[oppositeRole])

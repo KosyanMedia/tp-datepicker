@@ -114,6 +114,7 @@ class @TpDatepicker
     if date then @[role] = date
     @_setupDate(role, @[role])
     unless @settedRoles
+      @nodes[@role].classList.remove('tp-datepicker-trigger--active')
       @_setScale(0)
       @onDateSelect(date, role)
 
