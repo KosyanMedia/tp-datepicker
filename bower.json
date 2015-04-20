@@ -5,7 +5,7 @@
     "Pavel Gorlov <pavel@travelpayouts.com>"
   ],
   "description": "Travelpayouts.com lightweight datepicker",
-  "main": "datepicker.js",
+  "main": "dist/scripts/all.min.js",
   "moduleType": [
     "globals"
   ],
