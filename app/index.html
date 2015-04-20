@@ -13,11 +13,15 @@
       * {
         box-sizing: border-box;
       }
+
+      body {
+        font: 13px/1 'Open Sans', Arial, Sans-Serif;
+      }
+
       input {
         height: 3em;
         border: 1px solid #555;
         padding: 5px 15px;
-        font: 13px/1 'Open Sans', Arial, Sans-Serif;
       }
     </style>
   </head>
@@ -41,7 +45,7 @@
 
     <script>
       var simpleDatepicker = new TpDatepicker();
-      var simpleDatepicker = new TpDatepickerRange({roles: ['start-date', 'end-date']});
+      var simpleDatepicker = new TpDatepickerRange({legend: true, roles: ['start-date', 'end-date']});
     </script>
   </body>
 </html>

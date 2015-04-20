@@ -40,10 +40,11 @@ class @TpDatepickerRange extends TpDatepicker
       else
         return false
 
+  _currentDateType: -> if @isEndDate then 'endDate' else 'startDate'
 
   _showCallback: (date, role) ->
     super(date, role)
-    @[if @isEndDate then 'endDate' else 'startDate'] = date if date
+    @[@_currentDateType()] = date if date
     @settedRoles[role] = true
     @_checkDates(role)
 
@@ -76,7 +77,7 @@ class @TpDatepickerRange extends TpDatepicker
   _renderDatepicker: ->
     super()
     @_drawSausage(@startDate, @endDate)
-    @_updateLegend(@t.legend[@role]) if @legend && @prevRole != @role
+    @_updateLegend(@t.legend[@_currentDateType()]) if @legend && @prevRole != @role
 
   _updateLegend: (text) ->
     node = @popupRenderer.legendNode
