@@ -18,11 +18,11 @@ gulp.task('styles', function () {
 gulp.task('scripts', function () {
   return gulp.src('app/scripts/**/*.coffee')
     .pipe($.coffee())
-    .pipe(gulp.dest('.tmp/scripts'));
+    .pipe(gulp.dest('dist/scripts'));
 });
 
 gulp.task('html', ['styles', 'scripts'], function () {
-  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+  var assets = $.useref.assets({searchPath: '{.tmp,dist,app}'});
 
   return gulp.src('app/*.html')
     .pipe(assets)
@@ -36,13 +36,14 @@ gulp.task('html', ['styles', 'scripts'], function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('connect', ['styles'], function () {
+gulp.task('connect', ['styles', 'scripts'], function () {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
   var app = require('connect')()
     .use(require('connect-livereload')({port: 35729}))
     .use(serveStatic('.tmp'))
     .use(serveStatic('app'))
+    .use(serveStatic('dist'))
     // paths to bower_components should be relative to the current file
     // e.g. in app/index.html you should use ../bower_components
     .use('/bower_components', serveStatic('bower_components'))
