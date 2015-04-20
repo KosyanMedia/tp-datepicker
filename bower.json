@@ -1,0 +1,26 @@
+{
+  "name": "tp-datepicker",
+  "version": "0.0.0",
+  "authors": [
+    "Pavel Gorlov <pavel@travelpayouts.com>"
+  ],
+  "description": "Travelpayouts.com lightweight datepicker",
+  "main": "datepicker.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "datepicker",
+    "range",
+    "date"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/KosyanMedia/tp-datepicker",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

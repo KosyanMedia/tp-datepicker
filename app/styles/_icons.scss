@@ -1,0 +1,19 @@
+.tp-datepicker-icon {
+  background-repeat: no-repeat;
+
+  &.tp-datepicker-icon-arrow_from {
+    background-image: url("data:image/svg+xml,<svg version='1.2' baseProfile='tiny' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'><path fill='" + $tpDatepickerBrandColor + "' d='M21.7 22H0V0h21.7L26 11z'/></svg>");
+  }
+
+  &.tp-datepicker-icon-arrow_to {
+    background-image: url("data:image/svg+xml,<svg version='1.2' baseProfile='tiny' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'><path fill='" + $tpDatepickerSecondColor + "' d='M4.3 22H26V0H4.3L0 11z'/></svg>");
+  }
+
+  &.tp-datepicker-icon-calendar {
+    background-image: url("data:image/svg+xml,<svg version='1.2' baseProfile='tiny' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 18'><path d='M16 2h-2.5V1c0-.6-.5-1-1-1h-1c-.5 0-1 .4-1 1v1h-4V1c0-.6-.5-1-1-1h-1c-.5 0-1 .4-1 1v1H1c-.6 0-1 .4-1 1v2h17V3c0-.6-.4-1-1-1zM0 17c0 .5.4 1 1 1h15c.5 0 1-.5 1-1V6H0v11zm11-9h3v2h-3V8zm0 3h3v2h-3v-2zm0 3h3v2h-3v-2zM7 8h3v2H7V8zm0 3h3v2H7v-2zm0 3h3v2H7v-2zM3 8h3v2H3V8zm0 3h3v2H3v-2zm0 3h3v2H3v-2z' fill='" + $tpDatepickerBrandColor + "'/></svg>");
+  }
+
+  &.tp-datepicker-icon-arrow {
+    background-image: url("data:image/svg+xml,<svg version='1.2' baseProfile='tiny' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30.6 24.6'><path fill='" + $tpDatepickerSecondColor + "' d='M.6 10.8l.2-.2 9.9-10c.8-.8 2.2-.8 3 0l.3.2c.8.8.8 2.2 0 3L7.9 10h20.6c1.2 0 2.1 1 2.1 2.1v.3c0 1.2-1 2.1-2.1 2.1H7.9l6.2 6.2c.8.8.8 2.2 0 3l-.3.3c-.8.8-2.2.8-3 0L.8 14l-.2-.2c-.8-.8-.8-2.2 0-3z'/></svg>");
+  }
+}

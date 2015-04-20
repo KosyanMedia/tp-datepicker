@@ -1,0 +1,98 @@
+.tp-datepicker.tp-datepicker-range,
+.tp-datepicker.tp-datepicker-range-legend {
+  .tp-datepicker-table {
+    .tp-datepicker-range {
+      div{
+        background-color: $tpDatepickerRangeColor;
+      }
+    }
+
+    .tp-datepicker-start-sausage,
+    .tp-datepicker-end-sausage {
+      position: relative;
+
+      div {
+        background-size: 100%;
+        color: $tpDatepickerBackgroundColor;
+        &:before {
+          position: absolute;
+          content: '';
+          height: 24px;
+          width: 15%;
+          top: -1px;
+          background-color: $tpDatepickerBackgroundColor;
+        }
+      }
+    }
+
+    .tp-datepicker-start-sausage {
+      &--invisible {
+        div {
+          font-weight: bold;
+          color: $tpDatepickerBrandColor;
+        }
+      }
+
+      div {
+        @extend .tp-datepicker-icon.tp-datepicker-icon-arrow_from;
+        background-position: left;
+
+        &:before {
+          left: -1px;
+        }
+      }
+    }
+
+    .tp-datepicker-end-sausage {
+      &--invisible {
+        div {
+          font-weight: bold;
+          color: $tpDatepickerSecondColor;
+        }
+      }
+
+      div {
+        @extend .tp-datepicker-icon.tp-datepicker-icon-arrow_to;
+        background-position: right;
+
+        &:before {
+          right: -1px;
+        }
+      }
+    }
+  }
+
+  .tp-datepicker-legend {
+    position: absolute;
+    bottom: 15px;
+    right: 14px;
+    font-size: 12px;
+    color: $tpDatepickerSecondColor;
+    transition: all .5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &:before {
+      background-size: 100%;
+      position: absolute;
+      left: -20px;
+      top: -1px;
+      color: $tpDatepickerBackgroundColor;
+      content: '';
+      height: 13px;
+      width: 15px;
+    }
+  }
+
+  .tp-datepicker-legend--end-date {
+    &:before {
+      @extend .tp-datepicker-icon.tp-datepicker-icon-arrow_to;
+    }
+  }
+
+  .tp-datepicker-legend--start-date {
+    color: $tpDatepickerBrandColor;
+
+    &:before {
+      @extend .tp-datepicker-icon.tp-datepicker-icon-arrow_from;
+    }
+  }
+}
