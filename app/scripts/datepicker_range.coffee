@@ -6,7 +6,7 @@ class @TpDatepickerRange extends TpDatepicker
   legend: false
   type: 'range'
 
-  onRangeSelect: (startDate, endDate, role) -> console.log "#{role} selected range from #{startDate} to #{endDate}"
+  onSelect: (startDate, endDate, role) -> console.log "#{role} selected range from #{startDate} to #{endDate}"
 
   constructor: (options = {}) ->
     options.role = null
@@ -56,7 +56,7 @@ class @TpDatepickerRange extends TpDatepicker
       @_setupDate(oppositeRole, @[oppositeRole])
       @_listenerFor(oppositeRole)()
 
-    @onRangeSelect(@startDateObj, @endDateObj, role)
+    @onSelect(@startDateObj, @endDateObj, role)
 
   _oppositeRole: -> if @isEndDate then @startDateRole else @endDateRole
 

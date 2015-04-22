@@ -12,12 +12,13 @@ class @TpDatepicker
   legend: false
   type: 'simple'
 
-  onDateSelect: (date, role) -> console.log "#{role} selected date #{date}"
+  onSelect: (date, role) -> console.log "#{role} selected date #{date}"
 
   constructor: (options = {}) ->
     @datepickerWrapper = options.wrapper || document.body
     @roles = (options.role && [options.role]) || options.roles || ['tp-datepicker']
     @role = @roles[0]
+    @onSelect = options.callback if options.callback
 
     for role in @roles
       node = @nodes[role] = @datepickerWrapper.querySelector("[role=\"#{role}\"]")
@@ -116,7 +117,7 @@ class @TpDatepicker
     unless @settedRoles
       @nodes[@role].classList.remove('tp-datepicker-trigger--active')
       @_setScale(0)
-      @onDateSelect(date, role)
+      @onSelect(date, role)
 
   _setupDate: (role, date) ->
     @nodes[role].setAttribute('data-date', date)
