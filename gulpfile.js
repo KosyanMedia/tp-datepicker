@@ -77,7 +77,7 @@ gulp.task('watch', ['connect'], function () {
 });
 
 gulp.task('build', ['html'], function () {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+  return gulp.src('dist/**/*').pipe($.size({title: 'build', showFiles: true, gzip: true}));
 });
 
 gulp.task('default', ['clean'], function () {
