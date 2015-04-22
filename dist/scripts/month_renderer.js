@@ -1,21 +1,21 @@
 (function() {
   this.TpDatepickerMonthRenderer = (function() {
-    TpDatepickerMonthRenderer.prototype.prefix = 'tp-datepicker-';
+    TpDatepickerMonthRenderer.prototype.prefix = '';
 
     TpDatepickerMonthRenderer.prototype.marks = ['prev', 'current-date', 'next'];
 
     TpDatepickerMonthRenderer.prototype.isTouchDevice = null;
 
-    function TpDatepickerMonthRenderer(callback, daysNames, sundayFirst, marks) {
+    function TpDatepickerMonthRenderer(callback, daysNames, sundayFirst, prefix) {
       var ref;
       this.callback = callback;
       this.daysNames = daysNames;
       this.sundayFirst = sundayFirst;
-      if (marks) {
-        this.marks = marks;
-      }
       ref = this.marks, this.marksPrev = ref[0], this.marksCurrent = ref[1], this.marksNext = ref[2];
       this.isTouchDevice || (this.isTouchDevice = window.isTouchDevice);
+      if (prefix) {
+        this.prefix = prefix;
+      }
     }
 
     TpDatepickerMonthRenderer.prototype.render = function(month, year, isCurrentMonth, currentDay) {
@@ -71,14 +71,14 @@
       if (target.tagName === 'DIV') {
         target = target.parentNode;
       }
-      return target.classList.contains('tp-datepicker-current') && target.hasAttribute('id') && this.callback(event.type, target);
+      return target.classList.contains(this.prefix + "tp-datepicker-current") && target.hasAttribute('id') && this.callback(event.type, target);
     };
 
     TpDatepickerMonthRenderer.prototype._buildTable = function(days, isCurrentMonth, currentDay) {
       var callbackProxy, cd, date, day, daysHash, el, i, id, innerEl, j, k, table, th;
       table = document.createElement('table');
-      table.classList.add(this.prefix + "table");
-      table.classList.add(this.prefix + "table--" + (this.sundayFirst ? 'sunday-first' : 'normal-weekdays'));
+      table.classList.add(this.prefix + "tp-datepicker-table");
+      table.classList.add(this.prefix + "tp-datepicker-table--" + (this.sundayFirst ? 'sunday-first' : 'normal-weekdays'));
       callbackProxy = (function(_this) {
         return function(event) {
           return _this._callbackProxy(event);
@@ -95,7 +95,7 @@
       th = table.appendChild(document.createElement('tr'));
       for (i = j = 0; j <= 6; i = ++j) {
         el = th.appendChild(document.createElement('td'));
-        el.classList.add(this.prefix + "day_name");
+        el.classList.add(this.prefix + "tp-datepicker-day_name");
         el.textContent = this.daysNames[i];
       }
       daysHash = {};
@@ -105,17 +105,17 @@
           el = table.appendChild(document.createElement('tr'));
         }
         date = cd[0] + "-" + cd[1] + "-" + cd[2];
-        id = "" + this.prefix + date + "-" + cd[3];
+        id = this.prefix + "tp-datepicker-" + date + "-" + cd[3];
         day = daysHash[id] = el.appendChild(document.createElement('td'));
         innerEl = day.appendChild(document.createElement('div'));
         day.setAttribute('id', id);
         day.setAttribute('data-date', date);
         innerEl.textContent = cd[2];
-        day.className = "" + this.prefix + cd[3];
+        day.className = this.prefix + "tp-datepicker-" + cd[3];
         if (isCurrentMonth && currentDay > cd[2]) {
-          day.className += ' tp-datepicker-prev-date';
+          day.className += " " + this.prefix + "tp-datepicker-prev-date";
         } else {
-          day.className += ' tp-datepicker-current';
+          day.className += " " + this.prefix + "tp-datepicker-current";
         }
       }
       this.days = daysHash;

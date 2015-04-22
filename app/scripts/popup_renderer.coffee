@@ -1,4 +1,5 @@
 class @TpDatepickerPopupRenderer
+  prefix: ''
   node: false
   monthRenderer: null
 
@@ -6,28 +7,29 @@ class @TpDatepickerPopupRenderer
     year = @datepicker.year
     month = @datepicker.month
     node = @monthRenderer.render(year, month, @datepicker.isCirrentMonth, @datepicker.currentDay)
-    @nodeClassList.toggle 'tp-datepicker--current_month', @isCirrentMonth
+    @nodeClassList.toggle "#{@prefix}tp-datepicker--current_month", @isCirrentMonth
 
     @updateMonth "#{@datepicker.t.months[month]} #{year}"
     @datepickerContainerNode.replaceChild(node, @datepickerContainerNode.childNodes[0])
 
 
-  constructor: (@datepicker, listener) ->
+  constructor: (@datepicker, listener, prefix) ->
+    @prefix = prefix if prefix
     dayNames = @datepicker.t.days
     sundayFirst = @datepicker.t.start_from_sunday
     dayNames.unshift(dayNames.pop()) if sundayFirst
-    @monthRenderer = new TpDatepickerMonthRenderer(listener, dayNames, sundayFirst)
+    @monthRenderer = new TpDatepickerMonthRenderer(listener, dayNames, sundayFirst, @prefix)
 
     @node = document.createElement('div')
     @nodeClassList = @node.classList
-    @nodeClassList.add 'tp-datepicker'
-    @nodeClassList.add "tp-datepicker-#{@datepicker.type}"
+    @nodeClassList.add "#{@prefix}tp-datepicker"
+    @nodeClassList.add "#{@prefix}tp-datepicker-#{@datepicker.type}"
 
     headerNode = document.createElement('div')
-    headerNode.className = 'tp-datepicker-header'
+    headerNode.className = "#{@prefix}tp-datepicker-header"
 
     prevMonthNode = document.createElement('span')
-    prevMonthNode.className = 'tp-datepicker-prev-month-control'
+    prevMonthNode.className = "#{@prefix}tp-datepicker-prev-month-control"
     prevMonthNode.setAttribute('role', 'tp-datepicker-prev')
     headerNode.appendChild prevMonthNode
 
@@ -36,13 +38,13 @@ class @TpDatepickerPopupRenderer
     headerNode.appendChild @MonthNode
 
     nextMonthNode = document.createElement('span')
-    nextMonthNode.className = 'tp-datepicker-next-month-control'
+    nextMonthNode.className = "#{@prefix}tp-datepicker-next-month-control"
     nextMonthNode.setAttribute('role', 'tp-datepicker-next')
     headerNode.appendChild nextMonthNode
 
     @node.appendChild headerNode
     @datepickerContainerNode = document.createElement('div')
-    @datepickerContainerNode.className = 'tp-datepicker-container'
+    @datepickerContainerNode.className = "#{@prefix}tp-datepicker-container"
     @datepickerContainerNode.setAttribute('role', 'tp-datepicker-table-wrapper')
 
     @datepickerContainerNode.appendChild document.createElement('span')
@@ -50,7 +52,7 @@ class @TpDatepickerPopupRenderer
 
     if @datepicker.legend
       @legendNode = document.createElement('span')
-      @legendNode.className = 'tp-datepicker-legend'
+      @legendNode.className = "#{@prefix}tp-datepicker-legend"
       @legendNode.setAttribute('role', 'tp-datepicker-legend')
       @node.appendChild @legendNode
 

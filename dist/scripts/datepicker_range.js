@@ -17,7 +17,7 @@
 
     TpDatepickerRange.prototype.type = 'range';
 
-    TpDatepickerRange.prototype.onRangeSelect = function(startDate, endDate, role) {
+    TpDatepickerRange.prototype.onSelect = function(startDate, endDate, role) {
       return console.log(role + " selected range from " + startDate + " to " + endDate);
     };
 
@@ -86,13 +86,13 @@
       this._checkDates(role);
       oppositeRole = this._oppositeRole(role);
       if (this.settedRoles[oppositeRole]) {
-        this.nodes[this.role].classList.remove('tp-datepicker-trigger--active');
+        this.nodes[this.role].classList.remove(this.prefix + "tp-datepicker-trigger--active");
         this._setScale(0);
       } else {
         this._setupDate(oppositeRole, this[oppositeRole]);
         this._listenerFor(oppositeRole)();
       }
-      return this.onRangeSelect(this.startDateObj, this.endDateObj, role);
+      return this.onSelect(this.startDateObj, this.endDateObj, role);
     };
 
     TpDatepickerRange.prototype._oppositeRole = function() {
@@ -135,8 +135,8 @@
       var node;
       node = this.popupRenderer.legendNode;
       node.textContent = text;
-      node.classList.toggle('tp-datepicker-legend--start-date', !this.isEndDate);
-      node.classList.toggle('tp-datepicker-legend--end-date', this.isEndDate);
+      node.classList.toggle(this.prefix + "tp-datepicker-legend--start-date", !this.isEndDate);
+      node.classList.toggle(this.prefix + "tp-datepicker-legend--end-date", this.isEndDate);
       this._setScale(1.2, node);
       return setTimeout(((function(_this) {
         return function() {
@@ -156,59 +156,59 @@
       arrayEnd = sausageEnd.split('-');
       started = parseInt(arrayStart[1], 10) < this.month && parseInt(arrayEnd[1], 10) >= this.month;
       ended = parseInt(arrayEnd[1], 10) < this.month && parseInt(arrayStart[1], 10) >= this.month;
-      sausageStart = "tp-datepicker-" + sausageStart + "-current-date";
-      sausageEnd = "tp-datepicker-" + sausageEnd + "-current-date";
+      sausageStart = this.prefix + "tp-datepicker-" + sausageStart + "-current-date";
+      sausageEnd = this.prefix + "tp-datepicker-" + sausageEnd + "-current-date";
       samePoints = sausageStart === sausageEnd;
       ref = this.popupRenderer.monthRenderer.days;
       results = [];
       for (date in ref) {
         node = ref[date];
         classList = node.classList;
-        if (classList.contains('tp-datepicker-current')) {
+        if (classList.contains(this.prefix + "tp-datepicker-current")) {
           isStarting = sausageStart === date;
           isEnding = sausageEnd === date;
           if (isStarting && !((samePoints || ended) && this.isEndDate)) {
-            classList.add('tp-datepicker-start-sausage');
-            classList.remove('tp-datepicker-range');
-            classList.remove('tp-datepicker-end-sausage');
-            classList.remove('tp-datepicker-end-sausage--invisible');
-            classList.remove('tp-datepicker-start-sausage--invisible');
+            classList.add(this.prefix + "tp-datepicker-start-sausage");
+            classList.remove(this.prefix + "tp-datepicker-range");
+            classList.remove(this.prefix + "tp-datepicker-end-sausage");
+            classList.remove(this.prefix + "tp-datepicker-end-sausage--invisible");
+            classList.remove(this.prefix + "tp-datepicker-start-sausage--invisible");
             started = !samePoints;
             if (started && !ended) {
-              results.push(classList.add('tp-datepicker-range'));
+              results.push(classList.add(this.prefix + "tp-datepicker-range"));
             } else {
               results.push(void 0);
             }
           } else if (isEnding && (started || this.isEndDate)) {
-            classList.add('tp-datepicker-end-sausage');
-            classList.remove('tp-datepicker-range');
-            classList.remove('tp-datepicker-start-sausage');
-            classList.remove('tp-datepicker-end-sausage--invisible');
-            classList.remove('tp-datepicker-start-sausage--invisible');
+            classList.add(this.prefix + "tp-datepicker-end-sausage");
+            classList.remove(this.prefix + "tp-datepicker-range");
+            classList.remove(this.prefix + "tp-datepicker-start-sausage");
+            classList.remove(this.prefix + "tp-datepicker-end-sausage--invisible");
+            classList.remove(this.prefix + "tp-datepicker-start-sausage--invisible");
             if (started) {
-              classList.add('tp-datepicker-range');
+              classList.add(this.prefix + "tp-datepicker-range");
             }
             started = samePoints;
             results.push(ended = true);
           } else if (started && !ended) {
-            classList.add('tp-datepicker-range');
-            classList.remove('tp-datepicker-start-sausage');
-            results.push(classList.remove('tp-datepicker-end-sausage'));
+            classList.add(this.prefix + "tp-datepicker-range");
+            classList.remove(this.prefix + "tp-datepicker-start-sausage");
+            results.push(classList.remove(this.prefix + "tp-datepicker-end-sausage"));
           } else {
             if (isEnding) {
               ended = true;
-              classList.add('tp-datepicker-end-sausage--invisible');
-              classList.remove('tp-datepicker-start-sausage--invisible');
+              classList.add(this.prefix + "tp-datepicker-end-sausage--invisible");
+              classList.remove(this.prefix + "tp-datepicker-start-sausage--invisible");
             } else if (isStarting) {
-              classList.add('tp-datepicker-start-sausage--invisible');
-              classList.remove('tp-datepicker-end-sausage--invisible');
+              classList.add(this.prefix + "tp-datepicker-start-sausage--invisible");
+              classList.remove(this.prefix + "tp-datepicker-end-sausage--invisible");
             } else {
-              classList.remove('tp-datepicker-start-sausage--invisible');
-              classList.remove('tp-datepicker-end-sausage--invisible');
+              classList.remove(this.prefix + "tp-datepicker-start-sausage--invisible");
+              classList.remove(this.prefix + "tp-datepicker-end-sausage--invisible");
             }
-            classList.remove('tp-datepicker-range');
-            classList.remove('tp-datepicker-start-sausage');
-            results.push(classList.remove('tp-datepicker-end-sausage'));
+            classList.remove(this.prefix + "tp-datepicker-range");
+            classList.remove(this.prefix + "tp-datepicker-start-sausage");
+            results.push(classList.remove(this.prefix + "tp-datepicker-end-sausage"));
           }
         } else {
           results.push(void 0);

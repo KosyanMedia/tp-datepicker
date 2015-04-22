@@ -50,7 +50,7 @@ class @TpDatepickerRange extends TpDatepicker
 
     oppositeRole = @_oppositeRole(role)
     if @settedRoles[oppositeRole]
-      @nodes[@role].classList.remove('tp-datepicker-trigger--active')
+      @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
       @_setScale(0)
     else
       @_setupDate(oppositeRole, @[oppositeRole])
@@ -83,8 +83,8 @@ class @TpDatepickerRange extends TpDatepicker
   _updateLegend: (text) ->
     node = @popupRenderer.legendNode
     node.textContent = text
-    node.classList.toggle 'tp-datepicker-legend--start-date', !@isEndDate
-    node.classList.toggle 'tp-datepicker-legend--end-date', @isEndDate
+    node.classList.toggle "#{@prefix}tp-datepicker-legend--start-date", !@isEndDate
+    node.classList.toggle "#{@prefix}tp-datepicker-legend--end-date", @isEndDate
 
     @_setScale(1.2, node)
     setTimeout (=> @_setScale(1, node)), 200
@@ -98,49 +98,49 @@ class @TpDatepickerRange extends TpDatepicker
 
     started = parseInt(arrayStart[1], 10) < @month && parseInt(arrayEnd[1], 10) >= @month
     ended = parseInt(arrayEnd[1], 10) < @month && parseInt(arrayStart[1], 10) >= @month
-    sausageStart = "tp-datepicker-#{sausageStart}-current-date"
-    sausageEnd = "tp-datepicker-#{sausageEnd}-current-date"
+    sausageStart = "#{@prefix}tp-datepicker-#{sausageStart}-current-date"
+    sausageEnd = "#{@prefix}tp-datepicker-#{sausageEnd}-current-date"
     samePoints = sausageStart == sausageEnd
     for date, node of @popupRenderer.monthRenderer.days
       classList = node.classList
-      if classList.contains('tp-datepicker-current')
+      if classList.contains("#{@prefix}tp-datepicker-current")
         isStarting = sausageStart == date
         isEnding = sausageEnd == date
         if isStarting && !((samePoints || ended) && @isEndDate)
-          classList.add 'tp-datepicker-start-sausage'
-          classList.remove 'tp-datepicker-range'
-          classList.remove 'tp-datepicker-end-sausage'
-          classList.remove 'tp-datepicker-end-sausage--invisible'
-          classList.remove 'tp-datepicker-start-sausage--invisible'
+          classList.add "#{@prefix}tp-datepicker-start-sausage"
+          classList.remove "#{@prefix}tp-datepicker-range"
+          classList.remove "#{@prefix}tp-datepicker-end-sausage"
+          classList.remove "#{@prefix}tp-datepicker-end-sausage--invisible"
+          classList.remove "#{@prefix}tp-datepicker-start-sausage--invisible"
           started = !samePoints
-          classList.add 'tp-datepicker-range' if started && !ended
+          classList.add "#{@prefix}tp-datepicker-range" if started && !ended
         else if isEnding && (started || @isEndDate)
-          classList.add 'tp-datepicker-end-sausage'
-          classList.remove 'tp-datepicker-range'
-          classList.remove 'tp-datepicker-start-sausage'
-          classList.remove 'tp-datepicker-end-sausage--invisible'
-          classList.remove 'tp-datepicker-start-sausage--invisible'
-          classList.add 'tp-datepicker-range' if started
+          classList.add "#{@prefix}tp-datepicker-end-sausage"
+          classList.remove "#{@prefix}tp-datepicker-range"
+          classList.remove "#{@prefix}tp-datepicker-start-sausage"
+          classList.remove "#{@prefix}tp-datepicker-end-sausage--invisible"
+          classList.remove "#{@prefix}tp-datepicker-start-sausage--invisible"
+          classList.add "#{@prefix}tp-datepicker-range" if started
           started = samePoints
           ended = true
         else if started && !ended
-          classList.add 'tp-datepicker-range'
-          classList.remove 'tp-datepicker-start-sausage'
-          classList.remove 'tp-datepicker-end-sausage'
+          classList.add "#{@prefix}tp-datepicker-range"
+          classList.remove "#{@prefix}tp-datepicker-start-sausage"
+          classList.remove "#{@prefix}tp-datepicker-end-sausage"
         else
           if isEnding
             ended = true
-            classList.add 'tp-datepicker-end-sausage--invisible'
-            classList.remove 'tp-datepicker-start-sausage--invisible'
+            classList.add "#{@prefix}tp-datepicker-end-sausage--invisible"
+            classList.remove "#{@prefix}tp-datepicker-start-sausage--invisible"
           else if isStarting
-            classList.add 'tp-datepicker-start-sausage--invisible'
-            classList.remove 'tp-datepicker-end-sausage--invisible'
+            classList.add "#{@prefix}tp-datepicker-start-sausage--invisible"
+            classList.remove "#{@prefix}tp-datepicker-end-sausage--invisible"
           else
-            classList.remove 'tp-datepicker-start-sausage--invisible'
-            classList.remove 'tp-datepicker-end-sausage--invisible'
-          classList.remove 'tp-datepicker-range'
-          classList.remove 'tp-datepicker-start-sausage'
-          classList.remove 'tp-datepicker-end-sausage'
+            classList.remove "#{@prefix}tp-datepicker-start-sausage--invisible"
+            classList.remove "#{@prefix}tp-datepicker-end-sausage--invisible"
+          classList.remove "#{@prefix}tp-datepicker-range"
+          classList.remove "#{@prefix}tp-datepicker-start-sausage"
+          classList.remove "#{@prefix}tp-datepicker-end-sausage"
 
   _changeDate: (date, step = 1) ->
     new Date((new Date(date)).setDate(date.getDate() + step))

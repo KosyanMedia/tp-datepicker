@@ -1,4 +1,5 @@
 class @TpDatepicker
+  prefix: ''
   roles: []
   role: null
   wrapper: false
@@ -19,10 +20,11 @@ class @TpDatepicker
     @roles = (options.role && [options.role]) || options.roles || ['tp-datepicker']
     @role = @roles[0]
     @onSelect = options.callback if options.callback
+    @prefix = options.prefix if options.prefix
 
     for role in @roles
       node = @nodes[role] = @datepickerWrapper.querySelector("[role=\"#{role}\"]")
-      node.classList.add 'tp-datepicker-trigger'
+      node.classList.add "#{@prefix}tp-datepicker-trigger"
       @[role] = @_parseDate(node.getAttribute('data-date'))
       if @isTouchDevice
         node.addEventListener 'touchstart', @_listenerFor(role)
@@ -41,7 +43,7 @@ class @TpDatepicker
 
 
     listener = (event_name, element) => @_callback_proxy(event_name, element)
-    @popupRenderer = new TpDatepickerPopupRenderer(this, listener)
+    @popupRenderer = new TpDatepickerPopupRenderer(this, listener, @prefix)
 
 
     if window.SwipeDetector
@@ -65,10 +67,10 @@ class @TpDatepicker
           return
         while node = node.parentNode
           break if node.tagName == 'BODY'
-          return if !node.parentNode || node.classList.contains('tp-datepicker') ||
+          return if !node.parentNode || node.classList.contains("#{@prefix}tp-datepicker") ||
             @roles.indexOf(node.getAttribute('role')) >= 0
 
-      @nodes[@role].classList.remove('tp-datepicker-trigger--active')
+      @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
       @_setScale(0)
 
   prevMonth: ->
@@ -95,7 +97,7 @@ class @TpDatepicker
     @month = @date.getMonth() + 1
     @year = @date.getFullYear()
     @_renderDatepicker()
-    node.classList.toggle('tp-datepicker-trigger--active', role == @role) for role, node of @nodes
+    node.classList.toggle("#{@prefix}tp-datepicker-trigger--active", role == @role) for role, node of @nodes
     window.positionManager.positionAround @nodes[@role], @popupRenderer.node if window.positionManager
 
 
@@ -115,7 +117,7 @@ class @TpDatepicker
     if date then @[role] = date
     @_setupDate(role, @[role])
     unless @settedRoles
-      @nodes[@role].classList.remove('tp-datepicker-trigger--active')
+      @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
       @_setScale(0)
       @onSelect(date, role)
 

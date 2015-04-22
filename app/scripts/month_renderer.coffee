@@ -1,12 +1,12 @@
 class @TpDatepickerMonthRenderer
-  prefix: 'tp-datepicker-'
+  prefix: ''
   marks: ['prev', 'current-date', 'next']
   isTouchDevice: null
 
-  constructor: (@callback, @daysNames, @sundayFirst, marks) ->
-    @marks = marks if marks
+  constructor: (@callback, @daysNames, @sundayFirst, prefix) ->
     [@marksPrev, @marksCurrent, @marksNext] = @marks
     @isTouchDevice ||= window.isTouchDevice
+    @prefix = prefix if prefix
 
   render: (month, year, isCurrentMonth, currentDay) ->
     @_buildTable(@_monthDaysArray(month, year), isCurrentMonth, currentDay)
@@ -52,12 +52,12 @@ class @TpDatepickerMonthRenderer
   _callbackProxy: (event) ->
     target = event.target
     target = target.parentNode if target.tagName == 'DIV'
-    target.classList.contains('tp-datepicker-current') && target.hasAttribute('id') && @callback(event.type, target)
+    target.classList.contains("#{@prefix}tp-datepicker-current") && target.hasAttribute('id') && @callback(event.type, target)
 
   _buildTable: (days, isCurrentMonth, currentDay) ->
     table = document.createElement 'table'
-    table.classList.add "#{@prefix}table"
-    table.classList.add "#{@prefix}table--#{if @sundayFirst then 'sunday-first' else 'normal-weekdays'}"
+    table.classList.add "#{@prefix}tp-datepicker-table"
+    table.classList.add "#{@prefix}tp-datepicker-table--#{if @sundayFirst then 'sunday-first' else 'normal-weekdays'}"
 
     callbackProxy = (event) => @_callbackProxy(event)
 
@@ -72,7 +72,7 @@ class @TpDatepickerMonthRenderer
     th = table.appendChild(document.createElement('tr'))
     for i in [0..6]
       el = th.appendChild(document.createElement('td'))
-      el.classList.add("#{@prefix}day_name")
+      el.classList.add("#{@prefix}tp-datepicker-day_name")
       el.textContent = @daysNames[i]
 
     daysHash = {}
@@ -80,17 +80,17 @@ class @TpDatepickerMonthRenderer
       cd = days[i]
       el = table.appendChild(document.createElement('tr')) if i % 7 == 0
       date = "#{cd[0]}-#{cd[1]}-#{cd[2]}"
-      id = "#{@prefix}#{date}-#{cd[3]}"
+      id = "#{@prefix}tp-datepicker-#{date}-#{cd[3]}"
       day = daysHash[id] = el.appendChild(document.createElement('td'))
       innerEl = day.appendChild(document.createElement('div'))
       day.setAttribute('id', id)
       day.setAttribute('data-date', date)
       innerEl.textContent = cd[2]
-      day.className = "#{@prefix}#{cd[3]}"
+      day.className = "#{@prefix}tp-datepicker-#{cd[3]}"
       if isCurrentMonth && currentDay > cd[2]
-        day.className += ' tp-datepicker-prev-date'
+        day.className += " #{@prefix}tp-datepicker-prev-date"
       else
-        day.className += ' tp-datepicker-current'
+        day.className += " #{@prefix}tp-datepicker-current"
 
     @days = daysHash
 
