@@ -57,6 +57,8 @@
         this.legendNode.setAttribute('role', 'tp-datepicker-legend');
         this.node.appendChild(this.legendNode);
       }
+      this.datepicker._setScale(0, this.node);
+      this.node.style.position = 'absolute';
       this.datepicker.datepickerWrapper.appendChild(this.node);
       this.node;
     }

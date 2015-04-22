@@ -215,11 +215,9 @@
     };
 
     TpDatepicker.prototype._renderDatepicker = function() {
-      console.time('render');
       this.isCirrentMonth = this.currentYear === this.year && this.currentMonth === this.month;
       this.popupRenderer.render(this);
-      this._setScale(1);
-      return console.timeEnd('render');
+      return this._setScale(1);
     };
 
     TpDatepicker.prototype._parseDate = function(string) {

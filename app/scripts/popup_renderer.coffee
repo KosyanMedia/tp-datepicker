@@ -56,6 +56,8 @@ class @TpDatepickerPopupRenderer
       @legendNode.setAttribute('role', 'tp-datepicker-legend')
       @node.appendChild @legendNode
 
+    @datepicker._setScale(0, @node)
+    @node.style.position = 'absolute'
     @datepicker.datepickerWrapper.appendChild @node
     @node
 

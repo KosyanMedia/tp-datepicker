@@ -35,7 +35,6 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
 
   font-weight: 200;
   font-size: 13px;
-  transform: scale(0);
   min-width: 200px;
   width: 100%;
   max-width: 260px;
@@ -47,7 +46,6 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
   background: $tpDatepickerBackgroundColor;
   box-shadow: $tpDatepickerBoxShadow;
   transition: all .2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  position: absolute;
 
   .tp-datepicker-header {
     width: 100%;
