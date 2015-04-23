@@ -88,12 +88,12 @@
           })(this),
           down: (function(_this) {
             return function() {
-              return _this._setScale(0);
+              return _this.popupRenderer.node.classList.remove(_this.prefix + "tp-datepicker--active");
             };
           })(this),
           up: (function(_this) {
             return function() {
-              return _this._setScale(0);
+              return _this.popupRenderer.node.classList.remove(_this.prefix + "tp-datepicker--active");
             };
           })(this)
         });
@@ -131,7 +131,7 @@
             }
           }
           _this.nodes[_this.role].classList.remove(_this.prefix + "tp-datepicker-trigger--active");
-          return _this._setScale(0);
+          return _this.popupRenderer.node.classList.remove(_this.prefix + "tp-datepicker--active");
         };
       })(this));
     };
@@ -204,7 +204,7 @@
       this._setupDate(role, this[role]);
       if (!this.settedRoles) {
         this.nodes[this.role].classList.remove(this.prefix + "tp-datepicker-trigger--active");
-        this._setScale(0);
+        this.popupRenderer.node.classList.remove(this.prefix + "tp-datepicker--active");
         return this.onSelect(date, role);
       }
     };
@@ -215,11 +215,9 @@
     };
 
     TpDatepicker.prototype._renderDatepicker = function() {
-      console.time('render');
       this.isCirrentMonth = this.currentYear === this.year && this.currentMonth === this.month;
       this.popupRenderer.render(this);
-      this._setScale(1);
-      return console.timeEnd('render');
+      return this.popupRenderer.node.classList.add(this.prefix + "tp-datepicker--active");
     };
 
     TpDatepicker.prototype._parseDate = function(string) {

@@ -50,8 +50,8 @@ class @TpDatepicker
       new SwipeDetector @popupRenderer.node,
         left: => @nextMonth()
         right: => @prevMonth()
-        down: => @_setScale(0)
-        up: => @_setScale(0)
+        down: => @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
+        up: => @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
 
 
     @popupRenderer.node.querySelector('[role="tp-datepicker-prev"]').addEventListener 'click', => @prevMonth()
@@ -71,7 +71,7 @@ class @TpDatepicker
             @roles.indexOf(node.getAttribute('role')) >= 0
 
       @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
-      @_setScale(0)
+      @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
 
   prevMonth: ->
     return if @isCirrentMonth
@@ -118,7 +118,7 @@ class @TpDatepicker
     @_setupDate(role, @[role])
     unless @settedRoles
       @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
-      @_setScale(0)
+      @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
       @onSelect(date, role)
 
   _setupDate: (role, date) ->
@@ -129,7 +129,7 @@ class @TpDatepicker
     @isCirrentMonth = @currentYear == @year && @currentMonth == @month
     @popupRenderer.render this
 
-    @_setScale(1)
+    @popupRenderer.node.classList.add("#{@prefix}tp-datepicker--active")
 
 
   _parseDate: (string) ->

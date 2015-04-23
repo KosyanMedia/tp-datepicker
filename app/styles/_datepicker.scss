@@ -48,6 +48,9 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
   box-shadow: $tpDatepickerBoxShadow;
   transition: all .2s cubic-bezier(0.165, 0.84, 0.44, 1);
   position: absolute;
+  &.tp-datepicker--active {
+    transform: scale(1);
+  }
 
   .tp-datepicker-header {
     width: 100%;

@@ -50,14 +50,14 @@ gulp.task('connect', ['styles', 'scripts'], function () {
     .use(serveIndex('app'));
 
   require('http').createServer(app)
-    .listen(9000)
+    .listen(9001)
     .on('listening', function () {
       console.log('Started connect web server on http://localhost:9000');
     });
 });
 
 gulp.task('serve', ['connect', 'watch'], function () {
-  require('opn')('http://localhost:9000', 'google chrome');
+  require('opn')('http://localhost:9001', 'google chrome');
 });
 
 gulp.task('watch', ['connect'], function () {

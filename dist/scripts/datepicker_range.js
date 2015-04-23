@@ -87,7 +87,7 @@
       oppositeRole = this._oppositeRole(role);
       if (this.settedRoles[oppositeRole]) {
         this.nodes[this.role].classList.remove(this.prefix + "tp-datepicker-trigger--active");
-        this._setScale(0);
+        this.popupRenderer.node.classList.remove(this.prefix + "tp-datepicker--active");
       } else {
         this._setupDate(oppositeRole, this[oppositeRole]);
         this._listenerFor(oppositeRole)();

@@ -51,7 +51,7 @@ class @TpDatepickerRange extends TpDatepicker
     oppositeRole = @_oppositeRole(role)
     if @settedRoles[oppositeRole]
       @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
-      @_setScale(0)
+      @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
     else
       @_setupDate(oppositeRole, @[oppositeRole])
       @_listenerFor(oppositeRole)()
