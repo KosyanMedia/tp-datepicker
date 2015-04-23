@@ -56,7 +56,7 @@ class @TpDatepickerPopupRenderer
       @legendNode.setAttribute('role', 'tp-datepicker-legend')
       @node.appendChild @legendNode
 
-    @datepicker.datepickerWrapper.appendChild @node
+    document.body.appendChild @node
     @node
 
 
