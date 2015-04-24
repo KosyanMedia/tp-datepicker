@@ -12,6 +12,7 @@ class @TpDatepicker
   settedRoles: false
   legend: false
   type: 'simple'
+  onlyFuture: true
 
   onSelect: (date, role) -> console.log "#{role} selected date #{date}"
 
@@ -74,7 +75,7 @@ class @TpDatepicker
       @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
 
   prevMonth: ->
-    return if @isCirrentMonth
+    return if @onlyFuture && @isCirrentMonth
     if @month == 1
       @year--
       @month = 12
@@ -127,6 +128,7 @@ class @TpDatepicker
 
   _renderDatepicker:  ->
     @isCirrentMonth = @currentYear == @year && @currentMonth == @month
+    @isPrevMonth = @currentYear > @year || (@currentYear == @year && @currentMonth > @month)
     @popupRenderer.render this
 
     @popupRenderer.node.classList.add("#{@prefix}tp-datepicker--active")

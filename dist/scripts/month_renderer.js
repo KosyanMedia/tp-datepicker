@@ -6,11 +6,12 @@
 
     TpDatepickerMonthRenderer.prototype.isTouchDevice = null;
 
-    function TpDatepickerMonthRenderer(callback, daysNames, sundayFirst, prefix) {
+    function TpDatepickerMonthRenderer(callback, daysNames, sundayFirst, prefix, onlyFuture) {
       var ref;
       this.callback = callback;
       this.daysNames = daysNames;
       this.sundayFirst = sundayFirst;
+      this.onlyFuture = onlyFuture;
       ref = this.marks, this.marksPrev = ref[0], this.marksCurrent = ref[1], this.marksNext = ref[2];
       this.isTouchDevice || (this.isTouchDevice = window.isTouchDevice);
       if (prefix) {
@@ -18,8 +19,8 @@
       }
     }
 
-    TpDatepickerMonthRenderer.prototype.render = function(year, month, isCurrentMonth, currentDay) {
-      return this._buildTable(this._monthDaysArray(year, month), isCurrentMonth, currentDay, month);
+    TpDatepickerMonthRenderer.prototype.render = function(year, month, isCurrentMonth, isPrevMonth, currentDay) {
+      return this._buildTable(this._monthDaysArray(year, month), isCurrentMonth, isPrevMonth, currentDay, month);
     };
 
     TpDatepickerMonthRenderer.prototype._firstDay = function(year, month) {
@@ -71,10 +72,12 @@
       if (target.tagName === 'DIV') {
         target = target.parentNode;
       }
-      return target.hasAttribute('id') && this.callback(event.type, target);
+      if (!(target.classList.contains(this.prefix + "tp-datepicker-prev-date") && this.onlyFuture)) {
+        return target.hasAttribute('id') && this.callback(event.type, target);
+      }
     };
 
-    TpDatepickerMonthRenderer.prototype._buildTable = function(days, isCurrentMonth, currentDay, currentMonth) {
+    TpDatepickerMonthRenderer.prototype._buildTable = function(days, isCurrentMonth, isPrevMonth, currentDay, currentMonth) {
       var callbackProxy, cd, date, day, daysHash, el, i, id, innerEl, j, k, table, th;
       table = document.createElement('table');
       table.classList.add(this.prefix + "tp-datepicker-table");
@@ -112,7 +115,7 @@
         day.setAttribute('data-date', date);
         innerEl.textContent = cd[2];
         day.className = this.prefix + "tp-datepicker-" + cd[3];
-        if (isCurrentMonth && ((currentDay > cd[2] && currentMonth >= cd[1]) || cd[3] === this.marksPrev)) {
+        if (isPrevMonth || (isCurrentMonth && ((currentDay > cd[2] && currentMonth >= cd[1]) || cd[3] === this.marksPrev))) {
           day.className += " " + this.prefix + "tp-datepicker-prev-date";
         } else {
           day.className += " " + this.prefix + "tp-datepicker-current";

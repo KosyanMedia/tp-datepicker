@@ -117,6 +117,11 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
       color: $tpDatepickerSecondColor;
       display: $tpDatepickerNextDatesDisplay;
       cursor: $tpDatepickerOutherDatesCursor;
+      &.tp-datepicker-prev-date {
+        div {
+          color: $tpDatepickerDisabledColor;
+        }
+      }
     }
 
     .tp-datepicker-prev {

@@ -3,13 +3,13 @@ class @TpDatepickerMonthRenderer
   marks: ['prev', 'current-date', 'next']
   isTouchDevice: null
 
-  constructor: (@callback, @daysNames, @sundayFirst, prefix) ->
+  constructor: (@callback, @daysNames, @sundayFirst, prefix, @onlyFuture) ->
     [@marksPrev, @marksCurrent, @marksNext] = @marks
     @isTouchDevice ||= window.isTouchDevice
     @prefix = prefix if prefix
 
-  render: (year, month, isCurrentMonth, currentDay) ->
-    @_buildTable(@_monthDaysArray(year, month), isCurrentMonth, currentDay, month)
+  render: (year, month, isCurrentMonth, isPrevMonth, currentDay) ->
+    @_buildTable(@_monthDaysArray(year, month), isCurrentMonth, isPrevMonth, currentDay, month)
 
   _firstDay: (year, month) -> (new Date(year, month - 1, 1)).getDay()
 
@@ -52,9 +52,10 @@ class @TpDatepickerMonthRenderer
   _callbackProxy: (event) ->
     target = event.target
     target = target.parentNode if target.tagName == 'DIV'
-    target.hasAttribute('id') && @callback(event.type, target)
+    unless target.classList.contains("#{@prefix}tp-datepicker-prev-date") && @onlyFuture
+      target.hasAttribute('id') && @callback(event.type, target)
 
-  _buildTable: (days, isCurrentMonth, currentDay, currentMonth) ->
+  _buildTable: (days, isCurrentMonth, isPrevMonth, currentDay, currentMonth) ->
     table = document.createElement 'table'
     table.classList.add "#{@prefix}tp-datepicker-table"
     table.classList.add "#{@prefix}tp-datepicker-table--#{if @sundayFirst then 'sunday-first' else 'normal-weekdays'}"
@@ -87,7 +88,7 @@ class @TpDatepickerMonthRenderer
       day.setAttribute('data-date', date)
       innerEl.textContent = cd[2]
       day.className = "#{@prefix}tp-datepicker-#{cd[3]}"
-      if isCurrentMonth && ((currentDay > cd[2] && currentMonth >= cd[1]) || cd[3] == @marksPrev)
+      if isPrevMonth || (isCurrentMonth && ((currentDay > cd[2] && currentMonth >= cd[1]) || cd[3] == @marksPrev))
         day.className += " #{@prefix}tp-datepicker-prev-date"
       else
         day.className += " #{@prefix}tp-datepicker-current"

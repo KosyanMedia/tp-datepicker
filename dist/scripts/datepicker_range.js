@@ -165,7 +165,7 @@
       for (date in ref) {
         node = ref[date];
         classList = node.classList;
-        if (!classList.contains(this.prefix + "tp-datepicker-prev-date")) {
+        if (!(this.onlyFuture && classList.contains(this.prefix + "tp-datepicker-prev-date"))) {
           isStarting = sausageStart === date;
           isEnding = sausageEnd === date;
           console.log(date, sausageEnd, sausageEnd);

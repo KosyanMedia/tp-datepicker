@@ -104,7 +104,7 @@ class @TpDatepickerRange extends TpDatepicker
     samePoints = sausageStart == sausageEnd
     for date, node of @popupRenderer.monthRenderer.days
       classList = node.classList
-      unless classList.contains("#{@prefix}tp-datepicker-prev-date")
+      unless @onlyFuture && classList.contains("#{@prefix}tp-datepicker-prev-date")
         isStarting = sausageStart == date
         isEnding = sausageEnd == date
         console.log  date, sausageEnd, sausageEnd

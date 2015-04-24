@@ -26,6 +26,8 @@
 
     TpDatepicker.prototype.type = 'simple';
 
+    TpDatepicker.prototype.onlyFuture = true;
+
     TpDatepicker.prototype.onSelect = function(date, role) {
       return console.log(role + " selected date " + date);
     };
@@ -137,7 +139,7 @@
     };
 
     TpDatepicker.prototype.prevMonth = function() {
-      if (this.isCirrentMonth) {
+      if (this.onlyFuture && this.isCirrentMonth) {
         return;
       }
       if (this.month === 1) {
@@ -216,6 +218,7 @@
 
     TpDatepicker.prototype._renderDatepicker = function() {
       this.isCirrentMonth = this.currentYear === this.year && this.currentMonth === this.month;
+      this.isPrevMonth = this.currentYear > this.year || (this.currentYear === this.year && this.currentMonth > this.month);
       this.popupRenderer.render(this);
       return this.popupRenderer.node.classList.add(this.prefix + "tp-datepicker--active");
     };
