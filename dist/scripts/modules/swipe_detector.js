@@ -1,4 +1,6 @@
 (function() {
+  window.isTouchDevice = window.ontouchstart || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+
   this.SwipeDetector = (function() {
     SwipeDetector.prototype.xDown = null;
 

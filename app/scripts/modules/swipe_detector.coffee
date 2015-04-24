@@ -1,3 +1,5 @@
+window.isTouchDevice = window.ontouchstart || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
+
 class @SwipeDetector
   xDown: null
   yDown: null
