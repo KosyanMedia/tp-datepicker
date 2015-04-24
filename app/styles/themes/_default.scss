@@ -9,5 +9,7 @@ $tpDatepickerNonContrastColor: #eee !default;
 $tpDatepickerPrevDatesVisibility: hidden !default;
 $tpDatepickerNextDatesDisplay: none !default;
 $tpDatepickerBorderWidth: 3px !default;
+$tpDatepickerCalendarViewBoxWidth: 25 !default; // 15 - image width, 10 margin-right
+$tpDatepickerCalendarViewBoxHeight: 17px !default; // 17px - image width
 $tpDatepickerBorder: $tpDatepickerBorderWidth solid $tpDatepickerBrandColor !default;
 $tpDatepickerBoxShadow: none !default;

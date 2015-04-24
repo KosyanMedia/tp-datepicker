@@ -4,8 +4,8 @@
 input.tp-datepicker-trigger {
   @extend .tp-datepicker-icon.tp-datepicker-icon-calendar;
   background-repeat: no-repeat;
-  background-position: 95% center;
-  background-size: 17px 18px;
+  background-position: right center;
+  background-size: auto $tpDatepickerCalendarViewBoxHeight;
   cursor: pointer;
   transition: border .5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }

@@ -10,7 +10,7 @@
   }
 
   &.tp-datepicker-icon-calendar {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D'1.2'%20baseProfile%3D'tiny'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2017%2018'%3E%3Cpath%20d%3D'M16%202h-2.5V1c0-.6-.5-1-1-1h-1c-.5%200-1%20.4-1%201v1h-4V1c0-.6-.5-1-1-1h-1c-.5%200-1%20.4-1%201v1H1c-.6%200-1%20.4-1%201v2h17V3c0-.6-.4-1-1-1zM0%2017c0%20.5.4%201%201%201h15c.5%200%201-.5%201-1V6H0v11zm11-9h3v2h-3V8zm0%203h3v2h-3v-2zm0%203h3v2h-3v-2zM7%208h3v2H7V8zm0%203h3v2H7v-2zm0%203h3v2H7v-2zM3%208h3v2H3V8zm0%203h3v2H3v-2zm0%203h3v2H3v-2z'%20fill%3D'%23" + str-slice(ie-hex-str($tpDatepickerBrandColor), 4) + "'%2F%3E%3C%2Fsvg%3E");
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.2%22%20baseProfile%3D%22tiny%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20" + $tpDatepickerCalendarViewBoxWidth + "%2017%22%3E%3Cpath%20fill%3D%22%23" + str-slice(ie-hex-str($tpDatepickerBrandColor), 4) + "%22%20d%3D%22M0%205v10c0%201.1.9%202%202%202h11c1.1%200%202-.9%202-2V5H0zm5%2010H2v-2h3v2zm0-3H2v-2h3v2zm0-3H2V7h3v2zm4%206H6v-2h3v2zm0-3H6v-2h3v2zm0-3H6V7h3v2zm4%206h-3v-2h3v2zm0-3h-3v-2h3v2zm0-3h-3V7h3v2zM13%202h-1V1c0-.6-.4-1-1-1h-1c-.6%200-1%20.4-1%201v1H6V1c0-.6-.4-1-1-1H4c-.6%200-1%20.4-1%201v1H2C.9%202%200%202.9%200%204h15c0-1.1-.9-2-2-2z%22%2F%3E%3C%2Fsvg%3E");
   }
 
   &.tp-datepicker-icon-arrow {
