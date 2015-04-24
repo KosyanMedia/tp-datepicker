@@ -94,5 +94,5 @@ class @TpDatepickerMonthRenderer
         day.className += " #{@prefix}tp-datepicker-current"
 
     @days = daysHash
-    console.log @days
+    
     table

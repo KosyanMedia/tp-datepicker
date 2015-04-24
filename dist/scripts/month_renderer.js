@@ -122,7 +122,6 @@
         }
       }
       this.days = daysHash;
-      console.log(this.days);
       return table;
     };
 

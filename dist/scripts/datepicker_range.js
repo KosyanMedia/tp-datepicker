@@ -147,7 +147,6 @@
 
     TpDatepickerRange.prototype._drawSausage = function(sausageStart, sausageEnd) {
       var arrayEnd, arrayStart, classList, date, ended, isEnding, isStarting, node, ref, results, samePoints, started;
-      console.log(sausageStart, sausageEnd);
       if (!(sausageStart || sausageEnd)) {
         return;
       }
@@ -168,7 +167,6 @@
         if (!(this.onlyFuture && classList.contains(this.prefix + "tp-datepicker-prev-date"))) {
           isStarting = sausageStart === date;
           isEnding = sausageEnd === date;
-          console.log(date, sausageEnd, sausageEnd);
           if (isStarting && !((samePoints || ended) && this.isEndDate)) {
             classList.add(this.prefix + "tp-datepicker-start-sausage");
             classList.remove(this.prefix + "tp-datepicker-range");

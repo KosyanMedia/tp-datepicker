@@ -90,7 +90,6 @@ class @TpDatepickerRange extends TpDatepicker
     setTimeout (=> @_setScale(1, node)), 200
 
   _drawSausage: (sausageStart, sausageEnd) ->
-    console.log sausageStart, sausageEnd
     return unless sausageStart || sausageEnd
     sausageStart ||= sausageEnd
     sausageEnd ||= sausageStart
@@ -107,7 +106,6 @@ class @TpDatepickerRange extends TpDatepicker
       unless @onlyFuture && classList.contains("#{@prefix}tp-datepicker-prev-date")
         isStarting = sausageStart == date
         isEnding = sausageEnd == date
-        console.log  date, sausageEnd, sausageEnd
         if isStarting && !((samePoints || ended) && @isEndDate)
           classList.add "#{@prefix}tp-datepicker-start-sausage"
           classList.remove "#{@prefix}tp-datepicker-range"
