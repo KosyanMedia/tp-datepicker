@@ -86,10 +86,11 @@ class @TpDatepickerRange extends TpDatepicker
     node.classList.toggle "#{@prefix}tp-datepicker-legend--start-date", !@isEndDate
     node.classList.toggle "#{@prefix}tp-datepicker-legend--end-date", @isEndDate
 
-    @_setScale(1.2, node)
+    @_setScale(1.1, node)
     setTimeout (=> @_setScale(1, node)), 200
 
   _drawSausage: (sausageStart, sausageEnd) ->
+    console.log sausageStart, sausageEnd
     return unless sausageStart || sausageEnd
     sausageStart ||= sausageEnd
     sausageEnd ||= sausageStart
@@ -98,14 +99,15 @@ class @TpDatepickerRange extends TpDatepicker
 
     started = parseInt(arrayStart[1], 10) < @month && parseInt(arrayEnd[1], 10) >= @month
     ended = parseInt(arrayEnd[1], 10) < @month && parseInt(arrayStart[1], 10) >= @month
-    sausageStart = "#{@prefix}tp-datepicker-#{sausageStart}-current-date"
-    sausageEnd = "#{@prefix}tp-datepicker-#{sausageEnd}-current-date"
+    sausageStart = "#{@prefix}tp-datepicker-#{sausageStart}"
+    sausageEnd = "#{@prefix}tp-datepicker-#{sausageEnd}"
     samePoints = sausageStart == sausageEnd
     for date, node of @popupRenderer.monthRenderer.days
       classList = node.classList
-      if classList.contains("#{@prefix}tp-datepicker-current")
+      unless classList.contains("#{@prefix}tp-datepicker-prev-date")
         isStarting = sausageStart == date
         isEnding = sausageEnd == date
+        console.log  date, sausageEnd, sausageEnd
         if isStarting && !((samePoints || ended) && @isEndDate)
           classList.add "#{@prefix}tp-datepicker-start-sausage"
           classList.remove "#{@prefix}tp-datepicker-range"

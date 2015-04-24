@@ -1,3 +1,4 @@
+$tpDatepickerZIndex: 1000 !default;
 $tpDatepickerBrandColor: #ff8e00 !default;
 $tpDatepickerSecondColor: #78b935 !default;
 $tpDatepickerBackgroundColor: #fff !default;
@@ -5,9 +6,10 @@ $tpDatepickerHolidaysColor: #f4511e !default;
 $tpDatepickerDisabledColor: #C0C0C0 !default;
 $tpDatepickerRangeColor: #f5f5f5 !default;
 $tpDatepickerBorderActive: 1px solid $tpDatepickerBrandColor !default;
-$tpDatepickerNonContrastColor: #eee !default;
-$tpDatepickerPrevDatesVisibility: hidden !default;
-$tpDatepickerNextDatesDisplay: none !default;
+$tpDatepickerNonContrastColor: lighten($tpDatepickerSecondColor, 40%) !default;
+$tpDatepickerPrevDatesVisibility: visible !default;
+$tpDatepickerNextDatesDisplay: table-cell !default;
+$tpDatepickerOutherDatesCursor: pointer !default;
 $tpDatepickerBorderWidth: 3px !default;
 $tpDatepickerCalendarViewBoxWidth: 25 !default; // 15 - image width, 10 margin-right
 $tpDatepickerCalendarViewBoxHeight: 17px !default; // 17px - image width

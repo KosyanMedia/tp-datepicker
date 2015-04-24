@@ -64,16 +64,19 @@
 
   .tp-datepicker-legend {
     position: absolute;
-    bottom: 15px;
-    right: 14px;
+    bottom: 11px;
+    right: 5px;
+    z-index: $tpDatepickerZIndex + 1;
     font-size: 12px;
+    padding: 5px 5px 5px 25px;
     color: $tpDatepickerSecondColor;
+    background-color: $tpDatepickerBackgroundColor;
     transition: all .5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
     &:before {
       background-size: 100%;
       position: absolute;
-      left: -20px;
+      left: 5px;
       color: $tpDatepickerBackgroundColor;
       content: '';
       height: 13px;

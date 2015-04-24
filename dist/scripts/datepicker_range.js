@@ -137,7 +137,7 @@
       node.textContent = text;
       node.classList.toggle(this.prefix + "tp-datepicker-legend--start-date", !this.isEndDate);
       node.classList.toggle(this.prefix + "tp-datepicker-legend--end-date", this.isEndDate);
-      this._setScale(1.2, node);
+      this._setScale(1.1, node);
       return setTimeout(((function(_this) {
         return function() {
           return _this._setScale(1, node);
@@ -147,6 +147,7 @@
 
     TpDatepickerRange.prototype._drawSausage = function(sausageStart, sausageEnd) {
       var arrayEnd, arrayStart, classList, date, ended, isEnding, isStarting, node, ref, results, samePoints, started;
+      console.log(sausageStart, sausageEnd);
       if (!(sausageStart || sausageEnd)) {
         return;
       }
@@ -156,17 +157,18 @@
       arrayEnd = sausageEnd.split('-');
       started = parseInt(arrayStart[1], 10) < this.month && parseInt(arrayEnd[1], 10) >= this.month;
       ended = parseInt(arrayEnd[1], 10) < this.month && parseInt(arrayStart[1], 10) >= this.month;
-      sausageStart = this.prefix + "tp-datepicker-" + sausageStart + "-current-date";
-      sausageEnd = this.prefix + "tp-datepicker-" + sausageEnd + "-current-date";
+      sausageStart = this.prefix + "tp-datepicker-" + sausageStart;
+      sausageEnd = this.prefix + "tp-datepicker-" + sausageEnd;
       samePoints = sausageStart === sausageEnd;
       ref = this.popupRenderer.monthRenderer.days;
       results = [];
       for (date in ref) {
         node = ref[date];
         classList = node.classList;
-        if (classList.contains(this.prefix + "tp-datepicker-current")) {
+        if (!classList.contains(this.prefix + "tp-datepicker-prev-date")) {
           isStarting = sausageStart === date;
           isEnding = sausageEnd === date;
+          console.log(date, sausageEnd, sausageEnd);
           if (isStarting && !((samePoints || ended) && this.isEndDate)) {
             classList.add(this.prefix + "tp-datepicker-start-sausage");
             classList.remove(this.prefix + "tp-datepicker-range");

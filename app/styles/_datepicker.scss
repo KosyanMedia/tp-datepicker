@@ -33,7 +33,7 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
     padding: 0;
   }
 
-  font-weight: 200;
+  font-weight: 400;
   font-size: 13px;
   transform: scale(0);
   min-width: 200px;
@@ -42,7 +42,7 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
   height: 220px;
   padding-bottom: 15px;
   padding-top: 5px;
-  z-index: 101;
+  z-index: $tpDatepickerZIndex;
   border: $tpDatepickerBorder;
   background: $tpDatepickerBackgroundColor;
   box-shadow: $tpDatepickerBoxShadow;
@@ -104,7 +104,7 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
 
     .tp-datepicker-prev-date {
       color: $tpDatepickerDisabledColor;
-      cursor: default;
+      cursor: $tpDatepickerOutherDatesCursor;
     }
 
     .tp-datepicker-current {
@@ -113,13 +113,21 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
     }
 
     .tp-datepicker-next {
-      color: $tpDatepickerNonContrastColor;
+      opacity: .4;
+      color: $tpDatepickerSecondColor;
       display: $tpDatepickerNextDatesDisplay;
+      cursor: $tpDatepickerOutherDatesCursor;
     }
 
     .tp-datepicker-prev {
-      color: $tpDatepickerNonContrastColor;
+      opacity: .4;
+      color: $tpDatepickerSecondColor;
       visibility: $tpDatepickerPrevDatesVisibility;
+      &.tp-datepicker-prev-date {
+        div {
+          color: $tpDatepickerDisabledColor;
+        }
+      }
     }
 
     td.tp-datepicker-day_name {

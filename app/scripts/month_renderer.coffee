@@ -8,8 +8,8 @@ class @TpDatepickerMonthRenderer
     @isTouchDevice ||= window.isTouchDevice
     @prefix = prefix if prefix
 
-  render: (month, year, isCurrentMonth, currentDay) ->
-    @_buildTable(@_monthDaysArray(month, year), isCurrentMonth, currentDay)
+  render: (year, month, isCurrentMonth, currentDay) ->
+    @_buildTable(@_monthDaysArray(year, month), isCurrentMonth, currentDay, month)
 
   _firstDay: (year, month) -> (new Date(year, month - 1, 1)).getDay()
 
@@ -52,9 +52,9 @@ class @TpDatepickerMonthRenderer
   _callbackProxy: (event) ->
     target = event.target
     target = target.parentNode if target.tagName == 'DIV'
-    target.classList.contains("#{@prefix}tp-datepicker-current") && target.hasAttribute('id') && @callback(event.type, target)
+    target.hasAttribute('id') && @callback(event.type, target)
 
-  _buildTable: (days, isCurrentMonth, currentDay) ->
+  _buildTable: (days, isCurrentMonth, currentDay, currentMonth) ->
     table = document.createElement 'table'
     table.classList.add "#{@prefix}tp-datepicker-table"
     table.classList.add "#{@prefix}tp-datepicker-table--#{if @sundayFirst then 'sunday-first' else 'normal-weekdays'}"
@@ -80,18 +80,18 @@ class @TpDatepickerMonthRenderer
       cd = days[i]
       el = table.appendChild(document.createElement('tr')) if i % 7 == 0
       date = "#{cd[0]}-#{cd[1]}-#{cd[2]}"
-      id = "#{@prefix}tp-datepicker-#{date}-#{cd[3]}"
+      id = "#{@prefix}tp-datepicker-#{date}"
       day = daysHash[id] = el.appendChild(document.createElement('td'))
       innerEl = day.appendChild(document.createElement('div'))
       day.setAttribute('id', id)
       day.setAttribute('data-date', date)
       innerEl.textContent = cd[2]
       day.className = "#{@prefix}tp-datepicker-#{cd[3]}"
-      if isCurrentMonth && currentDay > cd[2]
+      if isCurrentMonth && ((currentDay > cd[2] && currentMonth >= cd[1]) || cd[3] == @marksPrev)
         day.className += " #{@prefix}tp-datepicker-prev-date"
       else
         day.className += " #{@prefix}tp-datepicker-current"
 
     @days = daysHash
-
+    console.log @days
     table
