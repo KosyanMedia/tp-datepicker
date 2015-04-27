@@ -13,6 +13,9 @@ class @TpDatepicker
   legend: false
   type: 'simple'
   onlyFuture: true
+  offsets:
+    top: 0
+    left: 0
 
   onSelect: (date, role) -> console.log "#{role} selected date #{date}"
 
@@ -22,6 +25,8 @@ class @TpDatepicker
     @role = @roles[0]
     @onSelect = options.callback if options.callback
     @prefix = options.prefix if options.prefix
+    @offsets = options.offsets if options.offsets
+
 
     for role in @roles
       node = @nodes[role] = @datepickerWrapper.querySelector("[role=\"#{role}\"]")
@@ -99,7 +104,8 @@ class @TpDatepicker
     @year = @date.getFullYear()
     @_renderDatepicker()
     node.classList.toggle("#{@prefix}tp-datepicker-trigger--active", role == @role) for role, node of @nodes
-    window.positionManager.positionAround @nodes[@role], @popupRenderer.node if window.positionManager
+    if window.positionManager
+      window.positionManager.positionAround @nodes[@role], @popupRenderer.node, false, @offsets
 
 
   _callback_proxy: (event_name, element) ->

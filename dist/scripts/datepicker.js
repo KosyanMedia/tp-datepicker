@@ -28,6 +28,11 @@
 
     TpDatepicker.prototype.onlyFuture = true;
 
+    TpDatepicker.prototype.offsets = {
+      top: 0,
+      left: 0
+    };
+
     TpDatepicker.prototype.onSelect = function(date, role) {
       return console.log(role + " selected date " + date);
     };
@@ -45,6 +50,9 @@
       }
       if (options.prefix) {
         this.prefix = options.prefix;
+      }
+      if (options.offsets) {
+        this.offsets = options.offsets;
       }
       ref = this.roles;
       for (i = 0, len = ref.length; i < len; i++) {
@@ -175,7 +183,7 @@
         node.classList.toggle(this.prefix + "tp-datepicker-trigger--active", role === this.role);
       }
       if (window.positionManager) {
-        return window.positionManager.positionAround(this.nodes[this.role], this.popupRenderer.node);
+        return window.positionManager.positionAround(this.nodes[this.role], this.popupRenderer.node, false, this.offsets);
       }
     };
 

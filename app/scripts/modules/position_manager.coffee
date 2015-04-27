@@ -1,5 +1,5 @@
 window.positionManager =
-  positionAround: (targetNode, sourceNode, forcedBottom = false) ->
+  positionAround: (targetNode, sourceNode, forcedBottom = false, offsets={top: 0, left: 0}) ->
     sourceNode.style.position = 'absolute'
     bodyRect = document.body.getBoundingClientRect()
     targetRect = targetNode.getBoundingClientRect()
@@ -11,11 +11,11 @@ window.positionManager =
     showBottom = bottomSpace > targetRect.top unless showBottom
 
     if showBottom
-      sourceNode.style.top = "#{targetPosition.top + targetHeight + document.body.scrollTop}px"
-      sourceNode.style.left = "#{targetPosition.left + document.body.scrollLeft}px"
+      sourceNode.style.top = "#{targetPosition.top + targetHeight + document.body.scrollTop + offsets.top}px"
+      sourceNode.style.left = "#{targetPosition.left + document.body.scrollLeft + offsets.left}px"
     else
-      sourceNode.style.top = "#{targetPosition.top - sourceNode.offsetHeight + document.body.scrollTop}px"
-      sourceNode.style.left = "#{targetPosition.left + document.body.scrollLeft}px"
+      sourceNode.style.top = "#{targetPosition.top - sourceNode.offsetHeight + document.body.scrollTop - offsets.top}px"
+      sourceNode.style.left = "#{targetPosition.left + document.body.scrollLeft + offsets.left}px"
 
   _getOffset: (el) ->
     _x = _y = 0

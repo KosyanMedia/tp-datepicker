@@ -14,5 +14,9 @@
       }
     </style> </head> <body> <h1>Travelpayouts datepicker</h1> <h2>Simple datepicker</h2> <input type=text name=date role=tp-datepicker> <h2>Range datepicker</h2> <input type=text name=start_date role=start-date> <input type=text name=end_date role=end-date> <script src=scripts/all.min.js></script> <script>
       var simpleDatepicker = new TpDatepicker();
-      var rangeDatepicker = new TpDatepickerRange({legend: true, roles: ['start-date', 'end-date']});
+      var rangeDatepicker = new TpDatepickerRange({
+        legend: true,
+        roles: ['start-date', 'end-date'],
+        offsets: {top: 1, left: 0}
+      });
     </script> </body> </html> 

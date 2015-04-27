@@ -45,7 +45,11 @@
 
     <script>
       var simpleDatepicker = new TpDatepicker();
-      var rangeDatepicker = new TpDatepickerRange({legend: true, roles: ['start-date', 'end-date']});
+      var rangeDatepicker = new TpDatepickerRange({
+        legend: true,
+        roles: ['start-date', 'end-date'],
+        offsets: {top: 1, left: 0}
+      });
     </script>
   </body>
 </html>
