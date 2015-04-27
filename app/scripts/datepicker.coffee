@@ -68,9 +68,7 @@ class @TpDatepicker
       return unless node = event.target
 
       if node.tagName != 'BODY' && node.tagName != 'HTML'
-        if @roles.indexOf(node.getAttribute('role')) > -1
-          window.sendMetric("datepickerinputs_touch") if window.sendMetric
-          return
+        return if @roles.indexOf(node.getAttribute('role')) >= 0
         while node = node.parentNode
           break if node.tagName == 'BODY'
           return if !node.parentNode || node.classList.contains("#{@prefix}tp-datepicker") ||

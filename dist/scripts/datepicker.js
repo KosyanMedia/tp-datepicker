@@ -125,10 +125,7 @@
             return;
           }
           if (node.tagName !== 'BODY' && node.tagName !== 'HTML') {
-            if (_this.roles.indexOf(node.getAttribute('role')) > -1) {
-              if (window.sendMetric) {
-                window.sendMetric("datepickerinputs_touch");
-              }
+            if (_this.roles.indexOf(node.getAttribute('role')) >= 0) {
               return;
             }
             while (node = node.parentNode) {
