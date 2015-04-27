@@ -12,7 +12,7 @@
 
     TpDatepicker.prototype.today = new Date();
 
-    TpDatepicker.prototype.isCirrentMonth = false;
+    TpDatepicker.prototype.isCurrentMonth = false;
 
     TpDatepicker.prototype.t = window.translations.datepicker;
 
@@ -139,7 +139,7 @@
     };
 
     TpDatepicker.prototype.prevMonth = function() {
-      if (this.onlyFuture && this.isCirrentMonth) {
+      if (this.onlyFuture && this.isCurrentMonth) {
         return;
       }
       if (this.month === 1) {
@@ -217,7 +217,7 @@
     };
 
     TpDatepicker.prototype._renderDatepicker = function() {
-      this.isCirrentMonth = this.currentYear === this.year && this.currentMonth === this.month;
+      this.isCurrentMonth = this.currentYear === this.year && this.currentMonth === this.month;
       this.isPrevMonth = this.currentYear > this.year || (this.currentYear === this.year && this.currentMonth > this.month);
       this.popupRenderer.render(this);
       return this.popupRenderer.node.classList.add(this.prefix + "tp-datepicker--active");

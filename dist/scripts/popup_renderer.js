@@ -10,8 +10,8 @@
       var month, node, year;
       year = this.datepicker.year;
       month = this.datepicker.month;
-      node = this.monthRenderer.render(year, month, this.datepicker.isCirrentMonth, this.datepicker.isPrevMonth, this.datepicker.currentDay);
-      this.nodeClassList.toggle(this.prefix + "tp-datepicker--current_month", this.isCirrentMonth);
+      node = this.monthRenderer.render(year, month, this.datepicker.isCurrentMonth, this.datepicker.isPrevMonth, this.datepicker.currentDay);
+      this.nodeClassList.toggle(this.prefix + "tp-datepicker--current_month", this.onlyFuture && this.datepicker.isCurrentMonth);
       this.updateMonth(this.datepicker.t.months[month] + " " + year);
       return this.datepickerContainerNode.replaceChild(node, this.datepickerContainerNode.childNodes[0]);
     };
@@ -22,12 +22,13 @@
       if (prefix) {
         this.prefix = prefix;
       }
+      this.onlyFuture = this.datepicker.onlyFuture;
       dayNames = this.datepicker.t.days;
       sundayFirst = this.datepicker.t.start_from_sunday;
       if (sundayFirst) {
         dayNames.unshift(dayNames.pop());
       }
-      this.monthRenderer = new TpDatepickerMonthRenderer(listener, dayNames, sundayFirst, this.prefix, this.datepicker.onlyFuture);
+      this.monthRenderer = new TpDatepickerMonthRenderer(listener, dayNames, sundayFirst, this.prefix, this.onlyFuture);
       this.node = document.createElement('div');
       this.nodeClassList = this.node.classList;
       this.nodeClassList.add(this.prefix + "tp-datepicker");

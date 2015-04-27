@@ -188,7 +188,8 @@ input.tp-datepicker-trigger.tp-datepicker-trigger--active {
   }
 
   &.tp-datepicker--current_month {
-    .dp-prev-month-control, .dp-prev-month-control:hover {
+    .tp-datepicker-prev-month-control,
+    .tp-datepicker-prev-month-control:hover {
       opacity: .3;
       cursor: default;
     }

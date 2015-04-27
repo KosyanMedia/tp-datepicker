@@ -5,7 +5,7 @@ class @TpDatepicker
   wrapper: false
   popupRenderer: false
   today: new Date()
-  isCirrentMonth: false
+  isCurrentMonth: false
   t: window.translations.datepicker
   isTouchDevice: window.isTouchDevice
   nodes: []
@@ -75,7 +75,7 @@ class @TpDatepicker
       @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
 
   prevMonth: ->
-    return if @onlyFuture && @isCirrentMonth
+    return if @onlyFuture && @isCurrentMonth
     if @month == 1
       @year--
       @month = 12
@@ -127,7 +127,7 @@ class @TpDatepicker
     @nodes[role].setAttribute('value', @_formatDate(date))
 
   _renderDatepicker:  ->
-    @isCirrentMonth = @currentYear == @year && @currentMonth == @month
+    @isCurrentMonth = @currentYear == @year && @currentMonth == @month
     @isPrevMonth = @currentYear > @year || (@currentYear == @year && @currentMonth > @month)
     @popupRenderer.render this
 

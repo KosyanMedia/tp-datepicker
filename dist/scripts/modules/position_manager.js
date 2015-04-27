@@ -11,16 +11,16 @@
       targetPosition = this._getOffset(targetNode);
       targetHeight = targetNode.offsetHeight;
       bottomSpace = document.documentElement.clientHeight - targetRect.bottom;
-      showBottom = forcedBottom || bottomSpace > sourceNode.clientHeight;
+      showBottom = forcedBottom || bottomSpace > sourceNode.offsetHeight;
       if (!showBottom) {
         showBottom = bottomSpace > targetRect.top;
       }
       if (showBottom) {
-        sourceNode.style.top = (targetPosition.top + targetHeight) + "px";
-        return sourceNode.style.left = targetPosition.left + "px";
+        sourceNode.style.top = (targetPosition.top + targetHeight + document.body.scrollTop) + "px";
+        return sourceNode.style.left = (targetPosition.left + document.body.scrollLeft) + "px";
       } else {
-        sourceNode.style.top = (targetPosition.top - sourceNode.clientHeight) + "px";
-        return sourceNode.style.left = targetPosition.left + "px";
+        sourceNode.style.top = (targetPosition.top - sourceNode.offsetHeight + document.body.scrollTop) + "px";
+        return sourceNode.style.left = (targetPosition.left + document.body.scrollLeft) + "px";
       }
     },
     _getOffset: function(el) {

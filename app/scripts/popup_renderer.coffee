@@ -9,11 +9,11 @@ class @TpDatepickerPopupRenderer
     node = @monthRenderer.render(
       year,
       month,
-      @datepicker.isCirrentMonth,
+      @datepicker.isCurrentMonth,
       @datepicker.isPrevMonth,
       @datepicker.currentDay
     )
-    @nodeClassList.toggle "#{@prefix}tp-datepicker--current_month", @isCirrentMonth
+    @nodeClassList.toggle "#{@prefix}tp-datepicker--current_month", @onlyFuture && @datepicker.isCurrentMonth
 
     @updateMonth "#{@datepicker.t.months[month]} #{year}"
     @datepickerContainerNode.replaceChild(node, @datepickerContainerNode.childNodes[0])
@@ -21,10 +21,11 @@ class @TpDatepickerPopupRenderer
 
   constructor: (@datepicker, listener, prefix) ->
     @prefix = prefix if prefix
+    @onlyFuture = @datepicker.onlyFuture
     dayNames = @datepicker.t.days
     sundayFirst = @datepicker.t.start_from_sunday
     dayNames.unshift(dayNames.pop()) if sundayFirst
-    @monthRenderer = new TpDatepickerMonthRenderer(listener, dayNames, sundayFirst, @prefix, @datepicker.onlyFuture)
+    @monthRenderer = new TpDatepickerMonthRenderer(listener, dayNames, sundayFirst, @prefix, @onlyFuture)
 
     @node = document.createElement('div')
     @nodeClassList = @node.classList
