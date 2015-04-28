@@ -157,7 +157,7 @@ class @TpDatepicker
   _formatDate: (string) ->
     return unless string
     dateArray = string.split('-')
-    "#{dateArray[2]} #{@t.short_months[parseInt(dateArray[1], 10)]} #{dateArray[0]}"
+    "#{dateArray[2]} #{@t.short_months[parseInt(dateArray[1], 10)].toLowerCase()} #{dateArray[0]}"
 
   _setScale: (value, element = @popupRenderer.node) ->
     element.style.webkitTransform = element.style.transform = "scale(#{value})"
