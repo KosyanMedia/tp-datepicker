@@ -32,12 +32,9 @@ class @TpDatepicker
       node = @nodes[role] = @datepickerWrapper.querySelector("[role=\"#{role}\"]")
       node.classList.add "#{@prefix}tp-datepicker-trigger"
       @[role] = @_parseDate(node.getAttribute('data-date'))
-      if @isTouchDevice
-        node.addEventListener 'touchstart', @_listenerFor(role)
-      else
-        node.addEventListener 'click', @_listenerFor(role)
-
-      node.addEventListener 'focus', (event) -> event.preventDefault(); event.target.blur()
+      node.setAttribute('readonly', true)
+      node.addEventListener 'focus', @_listenerFor(role)
+      node.addEventListener 'keydown', (event) => @_processKey(event.keyCode)
 
     @_initPopup()
 
@@ -77,6 +74,14 @@ class @TpDatepicker
       @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
       @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
 
+  _processKey: (code) ->
+    switch code
+      when 27, 9
+        @popupRenderer.node.classList.remove("#{@prefix}tp-datepicker--active")
+        @nodes[@role].classList.remove("#{@prefix}tp-datepicker-trigger--active")
+      when 8
+        @nodes[@role].setAttribute('value', '')
+
   prevMonth: ->
     return if @onlyFuture && @isCurrentMonth
     if @month == 1
@@ -115,8 +120,11 @@ class @TpDatepicker
         return false
 
   _listenerFor: (role) ->
-    return =>
+    return (event) =>
       @show role, (date) => @_showCallback(date, role)
+      if @isTouchDevice
+        event.preventDefault()
+        event.target.blur()
 
   _showCallback: (date, role) ->
     if date then @[role] = date
