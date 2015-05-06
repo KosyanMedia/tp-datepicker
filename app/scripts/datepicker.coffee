@@ -106,7 +106,8 @@ class @TpDatepicker
     @month = @date.getMonth() + 1
     @year = @date.getFullYear()
     @_renderDatepicker()
-    node.classList.toggle("#{@prefix}tp-datepicker-trigger--active", role == @role) for role, node of @nodes
+    for role, node of @nodes
+      node.classList.toggle("#{@prefix}tp-datepicker-trigger--active", role == @role) if @roles.indexOf(role) > -1
     if window.positionManager
       window.positionManager.positionAround @nodes[@role], @popupRenderer.node, false, @offsets
 

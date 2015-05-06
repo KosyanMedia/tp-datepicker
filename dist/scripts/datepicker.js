@@ -186,7 +186,9 @@
       ref = this.nodes;
       for (role in ref) {
         node = ref[role];
-        node.classList.toggle(this.prefix + "tp-datepicker-trigger--active", role === this.role);
+        if (this.roles.indexOf(role) > -1) {
+          node.classList.toggle(this.prefix + "tp-datepicker-trigger--active", role === this.role);
+        }
       }
       if (window.positionManager) {
         return window.positionManager.positionAround(this.nodes[this.role], this.popupRenderer.node, false, this.offsets);
