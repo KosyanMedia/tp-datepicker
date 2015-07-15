@@ -1,7 +1,7 @@
 (function() {
   window.positionManager = {
     positionAround: function(targetNode, sourceNode, forcedBottom, offsets) {
-      var bodyRect, bottomSpace, showBottom, targetHeight, targetPosition, targetRect;
+      var bodyRect, bottomSpace, left, showBottom, targetHeight, targetPosition, targetRect, top;
       if (forcedBottom == null) {
         forcedBottom = false;
       }
@@ -12,7 +12,7 @@
         };
       }
       sourceNode.style.position = 'absolute';
-      bodyRect = document.body.getBoundingClientRect();
+      bodyRect = document.documentElement.getBoundingClientRect();
       targetRect = targetNode.getBoundingClientRect();
       targetPosition = this._getOffset(targetNode);
       targetHeight = targetNode.offsetHeight;
@@ -22,12 +22,26 @@
         showBottom = bottomSpace > targetRect.top;
       }
       if (showBottom) {
-        sourceNode.style.top = (targetPosition.top + targetHeight + document.body.scrollTop + offsets.top) + "px";
-        return sourceNode.style.left = (targetPosition.left + document.body.scrollLeft + offsets.left) + "px";
+        top = targetPosition.top + targetHeight - bodyRect.top + offsets.top;
+        left = targetPosition.left - bodyRect.left + offsets.left;
       } else {
-        sourceNode.style.top = (targetPosition.top - sourceNode.offsetHeight + document.body.scrollTop - offsets.top) + "px";
-        return sourceNode.style.left = (targetPosition.left + document.body.scrollLeft + offsets.left) + "px";
+        top = targetPosition.top - sourceNode.offsetHeight - bodyRect.top - offsets.top;
+        left = targetPosition.left - bodyRect.left + offsets.left;
       }
+      if (left + bodyRect.left + sourceNode.offsetWidth > window.innerWidth - bodyRect.left) {
+        left = window.innerWidth - bodyRect.left - sourceNode.offsetWidth;
+      }
+      if (top + sourceNode.offsetHeight > window.innerHeight - bodyRect.top) {
+        top = window.innerHeight - bodyRect.top - sourceNode.offsetHeight;
+      }
+      if (left < -bodyRect.left) {
+        left = -bodyRect.left;
+      }
+      if (top < -bodyRect.top) {
+        top = -bodyRect.top;
+      }
+      sourceNode.style.top = top + "px";
+      return sourceNode.style.left = left + "px";
     },
     _getOffset: function(el) {
       var _x, _y;

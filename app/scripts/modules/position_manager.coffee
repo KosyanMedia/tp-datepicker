@@ -1,7 +1,7 @@
 window.positionManager =
   positionAround: (targetNode, sourceNode, forcedBottom = false, offsets={top: 0, left: 0}) ->
     sourceNode.style.position = 'absolute'
-    bodyRect = document.body.getBoundingClientRect()
+    bodyRect = document.documentElement.getBoundingClientRect()
     targetRect = targetNode.getBoundingClientRect()
     targetPosition = @_getOffset(targetNode)
     targetHeight = targetNode.offsetHeight
@@ -11,12 +11,23 @@ window.positionManager =
     showBottom = bottomSpace > targetRect.top unless showBottom
 
     if showBottom
-      sourceNode.style.top = "#{targetPosition.top + targetHeight + document.body.scrollTop + offsets.top}px"
-      sourceNode.style.left = "#{targetPosition.left + document.body.scrollLeft + offsets.left}px"
+      top = targetPosition.top + targetHeight - bodyRect.top + offsets.top
+      left = targetPosition.left - bodyRect.left + offsets.left
     else
-      sourceNode.style.top = "#{targetPosition.top - sourceNode.offsetHeight + document.body.scrollTop - offsets.top}px"
-      sourceNode.style.left = "#{targetPosition.left + document.body.scrollLeft + offsets.left}px"
+      top = targetPosition.top - sourceNode.offsetHeight - bodyRect.top - offsets.top
+      left = targetPosition.left - bodyRect.left + offsets.left
 
+    if left + bodyRect.left + sourceNode.offsetWidth > window.innerWidth - bodyRect.left
+      left = window.innerWidth - bodyRect.left - sourceNode.offsetWidth
+
+    if top + sourceNode.offsetHeight > window.innerHeight - bodyRect.top
+      top = window.innerHeight - bodyRect.top - sourceNode.offsetHeight
+
+    left = - bodyRect.left if left < - bodyRect.left
+    top = - bodyRect.top if top < - bodyRect.top
+
+    sourceNode.style.top = "#{top}px"
+    sourceNode.style.left = "#{left}px"
   _getOffset: (el) ->
     _x = _y = 0
     while  el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)
