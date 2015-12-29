@@ -18,8 +18,6 @@
 
     TpDatepicker.prototype.isTouchDevice = window.isTouchDevice;
 
-    TpDatepicker.prototype.nodes = [];
-
     TpDatepicker.prototype.settedRoles = false;
 
     TpDatepicker.prototype.legend = false;
@@ -42,6 +40,7 @@
       if (options == null) {
         options = {};
       }
+      this.nodes = [];
       this.datepickerWrapper = options.wrapper || document.body;
       this.roles = (options.role && [options.role]) || options.roles || ['tp-datepicker'];
       this.role = this.roles[0];

@@ -8,7 +8,6 @@ class @TpDatepicker
   isCurrentMonth: false
   t: window.translations.datepicker
   isTouchDevice: window.isTouchDevice
-  nodes: []
   settedRoles: false
   legend: false
   type: 'simple'
@@ -20,6 +19,7 @@ class @TpDatepicker
   onSelect: (date, role) -> console.log "#{role} selected date #{date}"
 
   constructor: (options = {}) ->
+    @nodes = []
     @datepickerWrapper = options.wrapper || document.body
     @roles = (options.role && [options.role]) || options.roles || ['tp-datepicker']
     @role = @roles[0]
@@ -37,7 +37,6 @@ class @TpDatepicker
       node.addEventListener 'keydown', (event) => @_processKey(event.keyCode)
 
     @_initPopup()
-
 
   _initPopup: ->
     @currentMonth = @today.getMonth() + 1
